@@ -21,6 +21,8 @@ The application displays test design topics in an accordion format.
   * Backend: Render
   * Frontend: GitHub Pages
 
+Note: Backend is hosted on a free Render instance, so the first request may be slower due to cold start.
+
 ---
 
 ## 🌐 Live Demo
