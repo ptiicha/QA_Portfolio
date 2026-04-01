@@ -4,16 +4,16 @@ test('accordion works', async ({ page }) => {
   await page.goto('https://ptiicha.github.io/QA_Portfolio/');
 
   // have to wait at least one h3 because of free Render limitation
-  await page.waitForSelector('h3', { timeout: 15000 });
+  await page.waitForSelector('.accordion-title', { timeout: 15000 });
 
-  const title = page.locator('h3');
+  const title = page.locator('.accordion-title').first();
   await expect(title).toBeVisible();
 
   await title.click();
 
-  const content = page.locator('p');
-  await expect(content).toBeVisible();
+  const content = page.locator('.accordion-content').first();
+  await expect(content).toHaveClass(/open/);
 
   await title.click();
-  await expect(content).toBeHidden();
+  await expect(content).not.toHaveClass(/open/);
 });
