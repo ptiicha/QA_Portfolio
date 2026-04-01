@@ -2,6 +2,63 @@
 <html>
 <head>
   <title>Test Design Topics</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 40px;
+    }
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    #topics {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  
+    .accordion-item {
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+  
+    .accordion-title {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .accordion-title:hover {
+      background: #f0f3ff;
+    }
+  
+    .accordion-content {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+  
+    .accordion-content.open {
+      padding: 15px 20px;
+      max-height: 200px;
+    }
+
+    .arrow {
+      margin-left: auto;
+      transition: transform 0.3s ease;
+    }
+  </style>
 </head>
 <body>
 
@@ -17,20 +74,35 @@ async function loadTopics() {
   const container = document.getElementById("topics");
 
   topics.forEach(topic => {
-    const title = document.createElement("h3");
-    title.textContent = topic.title;
+    const item = document.createElement("div");
+    item.className = "accordion-item";
 
-    const content = document.createElement("p");
+    const title = document.createElement("div");
+    title.className = "accordion-title";
+    title.innerHTML = `
+      ${topic.title}
+      <span class="arrow">▼</span>
+      `;
+
+    const content = document.createElement("div");
+    content.className = "accordion-content";
     content.textContent = topic.content;
-    content.style.display = "none";
 
     title.onclick = () => {
-      content.style.display =
-        content.style.display === "none" ? "block" : "none";
-    };
+      content.classList.toggle("open");
 
-    container.appendChild(title);
-    container.appendChild(content);
+      const arrow = title.querySelector(".arrow");
+
+      if (content.classList.contains("open")) {
+       arrow.style.transform = "rotate(180deg)";
+      } else {
+       arrow.style.transform = "rotate(0deg)";
+  }
+};
+
+    item.appendChild(title);
+    item.appendChild(content);
+    container.appendChild(item);
   });
 }
 
