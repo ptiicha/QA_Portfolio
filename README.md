@@ -33,6 +33,9 @@ https://ptiicha.github.io/QA_Portfolio/
 API:
 https://qa-portfolio.onrender.com/topics
 
+Run tests manually:
+[![Tests](https://github.com/ptiicha/QA_Portfolio/actions/workflows/tests.yml/badge.svg)](https://github.com/ptiicha/QA_Portfolio/actions/workflows/tests.yml)
+
 ---
 
 ## ⚙️ Features
