@@ -29,6 +29,7 @@ Note: Backend is hosted on a free Render instance, so the first request may be s
 
 Frontend:
 https://ptiicha.github.io/QA_Portfolio/
+! Please note that it can take a minute for Render's API cold start 
 
 API:
 https://qa-portfolio.onrender.com/topics
