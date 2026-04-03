@@ -40,3 +40,35 @@ def get_topics():
             "content": "Use experience to guess where defects are likely to occur."
         }
     ]
+
+@app.get("/quiz")
+def get_quiz():
+    return [
+        {
+            "question": "What is Boundary Value Analysis?",
+            "options": [
+                "Testing random values",
+                "Testing edge values",
+                "Testing UI colors"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "What is Equivalence Partitioning?",
+            "options": [
+                "Dividing inputs into groups",
+                "Testing only UI",
+                "Testing performance"
+            ],
+            "answer": 0
+        },
+        {
+            "question": "What is Decision Table Testing?",
+            "options": [
+                "Testing animations",
+                "Using tables for combinations",
+                "Testing fonts"
+            ],
+            "answer": 1
+        }
+    ]
