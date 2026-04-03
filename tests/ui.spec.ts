@@ -1,27 +1,30 @@
 import { test, expect } from '@playwright/test';
 
-test('accordion works', async ({ page, request }) => {
+test('accordions work', async ({ page, request }) => {
   // wake up Render (cold start)
   for (let i = 0; i < 5; i++) {
     const res = await request.get('https://qa-portfolio.onrender.com/topics');
-
     if (res.status() === 200) break;
-
     await new Promise(r => setTimeout(r, 2000));
 }
   await page.goto('https://ptiicha.github.io/QA_Portfolio/');
-
-  // have to wait at least one h3 because of free Render limitation
   await page.waitForSelector('.accordion-title', { timeout: 15000 });
 
-  const title = page.locator('.accordion-title').first();
-  await expect(title).toBeVisible();
+  const titles = page.locator('.accordion-title');
+  const contents = page.locator('.accordion-content');
 
-  await title.click();
+  const count = await titles.count();
 
-  const content = page.locator('.accordion-content').first();
-  await expect(content).toHaveClass(/open/);
-
-  await title.click();
-  await expect(content).not.toHaveClass(/open/);
+  for (let i = 0; i < count; i++) {
+    const title = titles.nth(i);
+    const content = contents.nth(i);
+  
+    await expect(title).toBeVisible();
+    
+    await title.click();
+    await expect(content).toHaveClass(/open/);
+    
+    await title.click();
+    await expect(content).not.toHaveClass(/open/);
+  }
 });
