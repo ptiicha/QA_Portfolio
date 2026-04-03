@@ -18,13 +18,17 @@ test('accordions work', async ({ page, request }) => {
   for (let i = 0; i < count; i++) {
     const title = titles.nth(i);
     const content = contents.nth(i);
-  
-    await expect(title).toBeVisible();
+
+    const text = await title.textContent();
+
+    await test.step(`Accordion: ${text?.trim()}`, async () => {
+      await expect(title).toBeVisible();
     
-    await title.click();
-    await expect(content).toHaveClass(/open/);
+      await title.click();
+      await expect(content).toHaveClass(/open/);
     
-    await title.click();
-    await expect(content).not.toHaveClass(/open/);
+      await title.click();
+      await expect(content).not.toHaveClass(/open/);
+    });
   }
 });
